@@ -41,7 +41,7 @@ const Cart = ({ onCloseCart, onRemoveFromCard, products = [], opened }) => {
     <div className={`${css.overlay} ${opened ? css.overlayVisible : ''}`}>
       <div className={css.cart}>
         <h2 className="d-flex justify-between mb-30">
-          Корзина <img className="cu-p" src="/img/btn-remove.svg" alt="close" onClick={onCloseCart} />
+          Корзина <img className="cu-p" src="img/btn-remove.svg" alt="close" onClick={onCloseCart} />
         </h2>
 
         {
@@ -58,7 +58,7 @@ const Cart = ({ onCloseCart, onRemoveFromCard, products = [], opened }) => {
                         <p className="mb-5">{item.title}</p>
                         <b>{item.price} грн.</b>
                       </div>
-                      <img onClick={() => onRemoveFromCard(item.id)} className="removeBtn" src="/img/btn-remove.svg" alt="Remove" />
+                      <img onClick={() => onRemoveFromCard(item.id)} className="removeBtn" src="img/btn-remove.svg" alt="Remove" />
                     </div>
                   ))
                 }
@@ -77,7 +77,7 @@ const Cart = ({ onCloseCart, onRemoveFromCard, products = [], opened }) => {
                   </li>
                 </ul>
                 <button disabled={isLoading} onClick={onClickOrder} className="mainButton">
-                  Оформить заказ <img src="/img/arrow.svg" alt="Arrow" />
+                  Оформить заказ <img src="img/arrow.svg" alt="Arrow" />
                 </button>
               </div>
             </div> :
