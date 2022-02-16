@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/shoes-store-react/static/css/main.7261a6d2.css",
-    "main.js": "/shoes-store-react/static/js/main.93e506fc.js",
+    "main.css": "/shoes-store-react/static/css/main.31707e6e.css",
+    "main.js": "/shoes-store-react/static/js/main.7c3c16e0.js",
     "index.html": "/shoes-store-react/index.html",
-    "main.7261a6d2.css.map": "/shoes-store-react/static/css/main.7261a6d2.css.map",
-    "main.93e506fc.js.map": "/shoes-store-react/static/js/main.93e506fc.js.map"
+    "main.31707e6e.css.map": "/shoes-store-react/static/css/main.31707e6e.css.map",
+    "main.7c3c16e0.js.map": "/shoes-store-react/static/js/main.7c3c16e0.js.map"
   },
   "entrypoints": [
-    "static/css/main.7261a6d2.css",
-    "static/js/main.93e506fc.js"
+    "static/css/main.31707e6e.css",
+    "static/js/main.7c3c16e0.js"
   ]
 }
