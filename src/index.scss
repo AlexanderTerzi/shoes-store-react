@@ -59,8 +59,8 @@ header {
 }
 
 .products {
-  display: grid;
-  grid-template-columns: 25% 25% 25% 25%;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .cartTotalBlock {
@@ -211,12 +211,6 @@ header {
   }
 }
 
-@media screen and(max-width: 1050px){
-  .products {
-    grid-template-columns: 33% 33% 33%;
-  }
-}
-
 @media screen and(max-width: 650px){
   .header {
     flex-direction: column;
@@ -234,13 +228,5 @@ header {
     input{
         width: 100%;
     }
-  }
-}
-
-@media screen and(max-width: 800px){
-  .products {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
   }
 }

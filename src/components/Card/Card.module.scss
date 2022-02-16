@@ -1,5 +1,14 @@
 .cardWrap {
   width: 25%;
+  @media screen and(max-width: 1050px){
+    width: 33%;
+  }
+  @media screen and(max-width: 850px){
+    width: 50%;
+  }
+  @media screen and(max-width: 550px){
+    width: 100%;
+  }
 }
 
 .card {
@@ -7,7 +16,7 @@
     padding: 30px;
     width: 220px;
     border-radius: 40px;
-    margin: 0 15px 30px;
+    margin: 0 auto 30px;
     transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
     background-color: #fff;
   
