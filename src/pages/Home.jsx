@@ -20,7 +20,7 @@ const Home = ({ searchValue, onChangeSearchInput, clearSearchValue, products, on
     return (
         <>
             <div className="content p-40">
-                <div className="d-flex align-center justify-between mb-40">
+                <div className="content__top d-flex align-center justify-between mb-40">
                     <h1>{searchValue ? `Поиск по запросу: "${searchValue}"` : 'Все кроссовки'}</h1>
                     <div className="search-block d-flex">
                         <img src="img/search.svg" alt="Search" />
@@ -28,7 +28,7 @@ const Home = ({ searchValue, onChangeSearchInput, clearSearchValue, products, on
                         {searchValue && <img className='cu-p clear' src="img/btn-remove.svg" alt="Clear" onClick={clearSearchValue} />}
                     </div>
                 </div>
-                <div className="d-flex flex-wrap justify-around">
+                <div className="products">
                     {renderProducts()}
                 </div>
             </div>

@@ -1,4 +1,4 @@
-import react, { useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import css from './Card.module.scss';
 import ContentLoader from "react-content-loader"
 import { AppContext } from "../../App";

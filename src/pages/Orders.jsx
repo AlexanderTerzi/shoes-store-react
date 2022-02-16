@@ -4,7 +4,7 @@ import Card from '../components/Card/Card';
 import axios from 'axios';
 
 const Orders = () => {
-    const { productsURL, onAddToCart, handleFavoritesList } = useContext(AppContext);
+    const { productsURL } = useContext(AppContext);
     const [orders, setOrders] = useState();
     const [isLoading, setIsLoading] = useState(true);
 
