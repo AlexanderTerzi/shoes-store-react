@@ -23,7 +23,7 @@ const Home = ({ searchValue, onChangeSearchInput, clearSearchValue, products, on
                 <div className="content__top d-flex align-center justify-between mb-40">
                     <h1>{searchValue ? `Поиск по запросу: "${searchValue}"` : 'Все кроссовки'}</h1>
                     <div className="search-block d-flex">
-                        <img src="img/search.svg" alt="Search" />
+                        <img src={`${process.env.PUBLIC_URL}/` + "img/search.svg"} alt="Search" />
                         <input onChange={onChangeSearchInput} placeholder="Поиск..." value={searchValue} />
                         {searchValue && <img className='cu-p clear' src="img/btn-remove.svg" alt="Clear" onClick={clearSearchValue} />}
                     </div>
