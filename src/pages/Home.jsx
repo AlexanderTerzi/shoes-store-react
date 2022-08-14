@@ -1,23 +1,24 @@
 import React from 'react';
 import Card from '../components/Card/Card';
 import Carousel from '../components/Carousel/Carousel';
+import Skeletons from '../components/Skeletons/Skeletons';
 
 const Home = ({ searchValue, onChangeSearchInput, clearSearchValue, products, onAddToCart, handleFavoritesList, isLoading }) => {
 
-    const renderProducts = () => {
-        const filteredItems = products.filter((item) =>
-            item.title.toLowerCase().includes(searchValue.toLowerCase()),
-        );
-        const fakeArray = [1, 2, 3, 4, 5, 6, 7, 8];
-        return (isLoading ? fakeArray : filteredItems).map((item) => (
-            <Card
-                key={item.id}
-                onPlusClick={(obj) => onAddToCart(obj)}
-                onFavoriteClick={obj => handleFavoritesList(obj)}
-                loading={isLoading}
-                {...item} />
-        ))
-    }
+    const filteredItems = products.filter((item) =>
+        item.title.toLowerCase().includes(searchValue.toLowerCase()),
+    );
+
+    const skeletons = [...new Array(8)].map((_, index) => <Skeletons key={index} />);
+
+    const sneakers = filteredItems.map((item) => (
+        <Card
+            key={item.id}
+            onPlusClick={(obj) => onAddToCart(obj)}
+            onFavoriteClick={obj => handleFavoritesList(obj)}
+            {...item} />
+    ))
+
     return (
         <>
             <div className="content p-40">
@@ -31,7 +32,7 @@ const Home = ({ searchValue, onChangeSearchInput, clearSearchValue, products, on
                 </div>
                 <Carousel />
                 <div className="products">
-                    {renderProducts()}
+                    {isLoading ? skeletons : sneakers}
                 </div>
             </div>
         </>

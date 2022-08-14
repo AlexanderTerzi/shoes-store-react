@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../App';
 import Card from '../components/Card/Card';
+import Skeletons from '../components/Skeletons/Skeletons';
 import axios from 'axios';
 
 const Orders = () => {
@@ -19,9 +20,9 @@ const Orders = () => {
                 console.error(error);
             }
         })();
-    }, [productsURL]);
+    }, []);
 
-    const fakeArray = [1, 2, 3, 4, 5, 6, 7, 8];
+    const skeletons = [...new Array(8)].map((_, index) => <Skeletons key={index} />);
 
     return (
         <>
@@ -31,14 +32,12 @@ const Orders = () => {
                 </div>
 
                 <div className="d-flex flex-wrap justify-around">
-                    {(isLoading ? fakeArray : orders).map((item, index) => (
+                    {isLoading ? skeletons : orders.map((item, index) => (
                         <Card
                             key={index}
-                            loading={isLoading}
                             {...item}
                         />
-                    )
-                    )}
+                    ))}
                 </div>
             </div>
         </>
