@@ -19,7 +19,7 @@ const Orders = () => {
                 console.error(error);
             }
         })();
-    }, []);
+    }, [productsURL]);
 
     const fakeArray = [1, 2, 3, 4, 5, 6, 7, 8];
 
