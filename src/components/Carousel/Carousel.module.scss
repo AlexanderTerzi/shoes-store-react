@@ -1,0 +1,100 @@
+.carouselItem {
+    height: 300px;
+    background-color: #F4EFE9;
+    border-radius: 20px;
+    margin: 0 10px 40px 10px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-left: 60px;
+
+    @media screen and(max-width: 600px) {
+        justify-content: center;
+        padding-left: 0;
+        padding-top: 50px;
+    }
+
+    .carouselImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        height: 300px;
+
+        @media screen and(max-width: 860px) {
+            width: 50%;
+            height: auto;
+            top: 20%;
+        }
+
+        @media screen and(max-width: 600px) {
+            top: 10px;
+            width: 130px;
+            right: 20px;
+            z-index: 4;
+        }
+    }
+
+    .carouselBrand {
+        position: absolute;
+        top: 16px;
+        left: 20px;
+    }
+
+    .carouselOffer {
+        position: relative;
+    }
+
+    .carouselOfferText {
+        font-size: 38px;
+        font-weight: 700;
+
+        .greenText {
+            color: #8BB43C;
+        }
+
+        .redText {
+            color: #ab0923;
+        }
+
+        @media screen and(max-width: 600px) {
+            text-align: center;
+            font-size: 30px;
+        }
+    }
+
+    .carouselButton {
+        width: 177px;
+        height: 47px;
+        border-radius: 30px;
+        border: none;
+        margin-top: 20px;
+        font-size: 16px;
+        color: #fff;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+        cursor: pointer;
+
+        &.greenButton {
+            background: #A5D364;
+
+            &:hover {
+                background: #7fad3f;
+            }
+        }
+
+        &.redButton {
+            background: #ab0923;
+
+            &:hover {
+                background: #7c081c;
+            }
+        }
+
+        @media screen and(max-width: 600px) {
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+        }
+    }
+}

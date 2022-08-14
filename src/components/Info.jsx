@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { AppContext } from '../App';
 
 const Info = ({ title, description, image }) => {
@@ -10,10 +11,10 @@ const Info = ({ title, description, image }) => {
             <img className="mb-20" width="120px" src={image} alt="Empty" />
             <h2>{title}</h2>
             <p className="opacity-6">{description}</p>
-            <button onClick={() => setCartOpened(false)} className="mainButton">
+            <Link to={process.env.PUBLIC_URL + '/'} onClick={() => setCartOpened(false)} className="mainButton">
                 <img src="img/arrow.svg" alt="Arrow" />
                 Вернуться назад
-            </button>
+            </Link>
         </div>
     );
 };

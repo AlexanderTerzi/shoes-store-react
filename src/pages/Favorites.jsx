@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../App';
 import Card from '../components/Card/Card';
+import Info from '../components/Info';
 
 const Favorites = () => {
 
@@ -14,17 +15,22 @@ const Favorites = () => {
                 </div>
 
                 <div className="d-flex flex-wrap justify-around">
-                    {favoritesList.map(item => (
-                        <Card
-                            id={item.id}
-                            image={item.image}
-                            title={item.title}
-                            price={item.price}
-                            key={item.id}
-                            favorited={true}
-                            onFavoriteClick={handleFavoritesList} />
-                    )
-                    )}
+                    {favoritesList != 0
+                        ? favoritesList.map(item => (
+                            <Card
+                                id={item.id}
+                                image={item.image}
+                                title={item.title}
+                                price={item.price}
+                                key={item.id}
+                                favorited={true}
+                                onFavoriteClick={handleFavoritesList} />
+                        ))
+                        : <Info
+                            title={"Закладок нет :("}
+                            description={"Добавьте хотя бы один товар"}
+                            image={`${process.env.PUBLIC_URL}/` + "img/empty-cart.jpg"} />
+                    }
                 </div>
             </div>
         </>

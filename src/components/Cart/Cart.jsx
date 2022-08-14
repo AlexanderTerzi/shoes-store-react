@@ -84,11 +84,8 @@ const Cart = ({ onCloseCart, onRemoveFromCard, products = [], opened }) => {
             <Info
               title={isOrderComplete ? "Заказ оформлен!" : "Корзина пустая"}
               description={isOrderComplete ? `Скоро ваш заказ #${orderId} будет передан в службу доставки` : "Добавьте товар"}
-              image={isOrderComplete ? `${process.env.PUBLIC_URL}/` + "img/complete-order.jpg" : "img/empty-cart.jpg"} />
-
+              image={isOrderComplete ? `${process.env.PUBLIC_URL}/` + "img/complete-order.jpg" : `${process.env.PUBLIC_URL}/` + "img/empty-cart.jpg"} />
         }
-
-
       </div>
     </div>
   );

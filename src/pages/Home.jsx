@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from '../components/Card/Card';
+import Carousel from '../components/Carousel/Carousel';
 
 const Home = ({ searchValue, onChangeSearchInput, clearSearchValue, products, onAddToCart, handleFavoritesList, isLoading }) => {
 
@@ -28,6 +29,7 @@ const Home = ({ searchValue, onChangeSearchInput, clearSearchValue, products, on
                         {searchValue && <img className='cu-p clear' src="img/btn-remove.svg" alt="Clear" onClick={clearSearchValue} />}
                     </div>
                 </div>
+                <Carousel />
                 <div className="products">
                     {renderProducts()}
                 </div>
