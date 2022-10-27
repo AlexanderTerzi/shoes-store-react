@@ -51,9 +51,9 @@ const Cart = ({ onCloseCart, onRemoveFromCard, products = [], opened }) => {
                 {
                   cartItems.map(item => (
                     <div className="cartItem d-flex align-center mb-20" key={item.id}>
-                      <div
-                        style={{ backgroundImage: `url(${item.image})` }}
-                        className="cartItemImg"></div>
+                      <img
+                        src={`${process.env.PUBLIC_URL}/${item.image}`}
+                        className="cartItemImg" />
                       <div className="mr-20 flex">
                         <p className="mb-5">{item.title}</p>
                         <b>{item.price} грн.</b>
