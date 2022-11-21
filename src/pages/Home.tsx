@@ -1,9 +1,22 @@
 import React from 'react';
+
+import { IAddItem, IProductsItem } from '../App';
+
 import Card from '../components/Card/Card';
 import Carousel from '../components/Carousel/Carousel';
 import Skeletons from '../components/Skeletons/Skeletons';
 
-const Home = ({ searchValue, onChangeSearchInput, clearSearchValue, products, onAddToCart, handleFavoritesList, isLoading }) => {
+interface IHomeProps {
+    searchValue: string;
+    onChangeSearchInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    clearSearchValue: () => void;
+    products: IProductsItem[];
+    onAddToCart: (obj: IAddItem) => void;
+    handleFavoritesList: (obj: IAddItem) => void;
+    isLoading: boolean;
+}
+
+const Home: React.FC<IHomeProps> = ({ searchValue, onChangeSearchInput, clearSearchValue, products, onAddToCart, handleFavoritesList, isLoading }) => {
 
     const filteredItems = products.filter((item) =>
         item.title.toLowerCase().includes(searchValue.toLowerCase()),
@@ -13,9 +26,10 @@ const Home = ({ searchValue, onChangeSearchInput, clearSearchValue, products, on
 
     const sneakers = filteredItems.map((item) => (
         <Card
+            favorited={false}
             key={item.id}
-            onPlusClick={(obj) => onAddToCart(obj)}
-            onFavoriteClick={obj => handleFavoritesList(obj)}
+            onPlusClick={(obj: IAddItem) => onAddToCart(obj)}
+            onFavoriteClick={(obj: IAddItem) => handleFavoritesList(obj)}
             {...item} />
     ))
 
@@ -27,7 +41,7 @@ const Home = ({ searchValue, onChangeSearchInput, clearSearchValue, products, on
                     <div className="search-block d-flex">
                         <img src={`${process.env.PUBLIC_URL}/` + "img/search.svg"} alt="Search" />
                         <input onChange={onChangeSearchInput} placeholder="Поиск..." value={searchValue} />
-                        {searchValue && <img className='cu-p clear' src="img/btn-remove.svg" alt="Clear" onClick={clearSearchValue} />}
+                        {searchValue && <img className='cu-p clear' src={`${process.env.PUBLIC_URL}/` + "img/btn-remove.svg"} alt="Clear" onClick={clearSearchValue} />}
                     </div>
                 </div>
                 <Carousel />

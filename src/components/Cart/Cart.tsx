@@ -1,13 +1,21 @@
-import React, { useContext, useState } from "react";
-import { AppContext } from "../../App";
-import Info from "../Info";
+import React, { MouseEventHandler, useContext, useState } from "react";
 import axios from "axios";
+
+import { AppContext, IAddItem } from "../../App";
 import { useCart } from "../../hooks/useCart";
+import Info from "../Info";
+
 import css from './Cart.module.scss';
 
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const Cart = ({ onCloseCart, onRemoveFromCard, products = [], opened }) => {
+interface ICartProps {
+  onCloseCart: MouseEventHandler<HTMLImageElement>;
+  onRemoveFromCard: (id: string | number) => void;
+  opened: boolean;
+}
+
+const Cart: React.FC<ICartProps> = ({ onCloseCart, onRemoveFromCard, opened }) => {
 
   const { cartItems, setCartItems, totalPrice } = useCart();
   const { productsURL } = useContext(AppContext);
@@ -49,7 +57,7 @@ const Cart = ({ onCloseCart, onRemoveFromCard, products = [], opened }) => {
             <div className="d-flex flex-column flex">
               <div className={css.items}>
                 {
-                  cartItems.map(item => (
+                  cartItems.map((item: IAddItem) => (
                     <div className="cartItem d-flex align-center mb-20" key={item.id}>
                       <img
                         src={`${process.env.PUBLIC_URL}/${item.image}`}

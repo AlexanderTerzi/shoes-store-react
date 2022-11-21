@@ -1,14 +1,24 @@
 import React, { useState, useContext } from "react";
-import css from './Card.module.scss';
 import { AppContext } from "../../App";
+import css from './Card.module.scss';
 
-const Card = ({ id,
+interface ICardProps {
+  id: string | number;
+  onFavoriteClick: any;
+  image: string;
+  title: string;
+  price: number | string;
+  onPlusClick: any;
+  favorited: boolean;
+}
+
+const Card: React.FC<ICardProps> = ({ id,
   onFavoriteClick,
   image,
   title,
   price,
   onPlusClick,
-  favorited = false,
+  favorited,
 }) => {
 
   const { isItemAdded } = useContext(AppContext);

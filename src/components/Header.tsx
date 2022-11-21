@@ -1,8 +1,13 @@
 import React from "react";
 import { Link } from 'react-router-dom';
+
 import { useCart } from "../hooks/useCart";
 
-const Header = (props) => {
+interface IHeaderProps {
+  onClickCart: () => void;
+}
+
+const Header: React.FC<IHeaderProps> = ({ onClickCart }) => {
 
   const { totalPrice } = useCart();
 
@@ -18,7 +23,7 @@ const Header = (props) => {
         </div>
       </Link>
       <ul className="d-flex nav">
-        <li className="mr-30 cu-p d-flex" onClick={props.onClickCart}>
+        <li className="mr-30 cu-p d-flex" onClick={onClickCart}>
           <img width={18} height={18} src={`${process.env.PUBLIC_URL}/` + "img/cart.svg"} alt="cart" />
           <span>{totalPrice} грн.</span>
         </li>

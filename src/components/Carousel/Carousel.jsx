@@ -6,8 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import css from './Carousel.module.scss'
 import CarouselItem from './CarouselItem/CarouselItem';
 
-function SampleNextArrow(props) {
-    const { className, style, onClick } = props;
+function SampleNextArrow({ className, style, onClick }) {
     return (
         <div
             className={className}
@@ -30,8 +29,7 @@ function SampleNextArrow(props) {
     );
 }
 
-function SamplePrevArrow(props) {
-    const { className, style, onClick } = props;
+function SamplePrevArrow({ className, style, onClick }) {
     return (
         <div
             className={className}

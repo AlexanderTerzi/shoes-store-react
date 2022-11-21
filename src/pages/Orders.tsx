@@ -1,19 +1,21 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { AppContext } from '../App';
+import { useContext, useEffect, useState } from 'react';
+import axios from 'axios';
+
+import { AppContext, IAddItem, IProductsItem } from '../App';
+
 import Card from '../components/Card/Card';
 import Skeletons from '../components/Skeletons/Skeletons';
-import axios from 'axios';
 
 const Orders = () => {
     const { productsURL } = useContext(AppContext);
-    const [orders, setOrders] = useState();
+    const [orders, setOrders] = useState<IAddItem[]>([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         (async () => {
             try {
-                const { data } = await axios.get(`${productsURL}/orders`);
-                setOrders(data.reduce((prev, obj) => [...prev, ...obj.items], []));
+                const { data } = await axios.get<IProductsItem[]>(`${productsURL}/orders`);
+                setOrders(data.reduce((prev: IAddItem[], obj: any) => [...prev, ...obj.items], []));
                 setIsLoading(false);
             } catch (error) {
                 alert('Ошибка при запросе заказов');
@@ -34,9 +36,11 @@ const Orders = () => {
                 <div className="d-flex flex-wrap justify-around">
                     {isLoading ? skeletons : orders.map((item, index) => (
                         <Card
+                            favorited={false}
+                            onFavoriteClick={undefined}
+                            onPlusClick={undefined}
                             key={index}
-                            {...item}
-                        />
+                            {...item} />
                     ))}
                 </div>
             </div>

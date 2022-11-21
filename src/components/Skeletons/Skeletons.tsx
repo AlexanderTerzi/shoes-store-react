@@ -1,8 +1,9 @@
 import React from 'react';
 import ContentLoader from "react-content-loader";
+
 import css from '../Card/Card.module.scss';
 
-const Skeletons = () => {
+const Skeletons: React.FC = () => {
     return (
         <div className={css.cardWrap}>
             <div className={css.card}>

@@ -1,8 +1,15 @@
 import React, { useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+
 import { AppContext } from '../App';
 
-const Info = ({ title, description, image }) => {
+interface IInfoProps {
+    title: string;
+    description: string;
+    image: string;
+}
+
+const Info: React.FC<IInfoProps> = ({ title, description, image }) => {
 
     const { setCartOpened } = useContext(AppContext);
 
@@ -14,7 +21,7 @@ const Info = ({ title, description, image }) => {
             <h2>{title}</h2>
             <p className="opacity-6">{description}</p>
             <Link to={location.pathname.includes('favorites') ? `${process.env.PUBLIC_URL}/` : location} onClick={() => setCartOpened(false)} className="mainButton">
-                <img src="img/arrow.svg" alt="Arrow" />
+                <img src={`${process.env.PUBLIC_URL}/` + "img/arrow.svg"} alt="Arrow" />
                 Вернуться назад
             </Link>
         </div>

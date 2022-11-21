@@ -1,32 +1,61 @@
-import { createContext, useEffect, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
+
+import axios from 'axios';
+
 import Header from './components/Header';
 import Cart from './components/Cart/Cart';
-import axios from 'axios';
-import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Favorites from './pages/Favorites';
 import Orders from './pages/Orders';
 
-let productsURL = 'https://620623fa92dd6600171c0852.mockapi.io';
+let productsURL: string = 'https://620623fa92dd6600171c0852.mockapi.io';
 
-export const AppContext = createContext({});
+export interface IProductsItem {
+  id: number | string;
+  title: string;
+  price: number | string;
+  image: string;
+};
+
+export interface IAddItem {
+  id: number | string;
+  title: string;
+  price: number | string;
+  image: string;
+  parentId: number | string;
+};
+
+export interface IGlobalContent {
+  cartItems: IAddItem[];
+  favoritesList: IAddItem[];
+  products: IProductsItem[];
+  isItemAdded: (id: string | number) => void;
+  handleFavoritesList: (obj: IAddItem) => void;
+  setCartOpened: any;
+  setCartItems: any;
+  productsURL: string;
+  onAddToCart: (obj: IAddItem) => void;
+}
+
+export const AppContext = createContext<IGlobalContent | any>(null);
 
 function App() {
 
-  const [cartOpened, setCartOpened] = useState(false);
-  const [products, setProducts] = useState([]);
-  const [cartItems, setCartItems] = useState([]);
-  const [searchValue, setSearchValue] = useState('');
-  const [favoritesList, setFavoritesList] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [cartOpened, setCartOpened] = useState<boolean>(false);
+  const [products, setProducts] = useState<IProductsItem[]>([]);
+  const [cartItems, setCartItems] = useState<IAddItem[]>([]);
+  const [searchValue, setSearchValue] = useState<string>('');
+  const [favoritesList, setFavoritesList] = useState<IAddItem[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     async function fetchData() {
       try {
         const [cartResponse, favoritesResponse, productsResponse] = await Promise.all([
-          axios.get(`${productsURL}/cart`),
-          axios.get(`${productsURL}/favorites`),
-          axios.get(`${productsURL}/products`)]);
+          axios.get<IAddItem[]>(`${productsURL}/cart`),
+          axios.get<IAddItem[]>(`${productsURL}/favorites`),
+          axios.get<IProductsItem[]>(`${productsURL}/products`)]);
 
         setIsLoading(false);
 
@@ -42,7 +71,7 @@ function App() {
     fetchData();
   }, [])
 
-  const onAddToCart = async (obj) => {
+  const onAddToCart = async (obj: IAddItem) => {
     try {
       const findItem = cartItems.find((item) => Number(item.parentId) === Number(obj.id));
       if (findItem) {
@@ -65,10 +94,9 @@ function App() {
       alert('Не получилось добавить в корзину');
       console.error(error);
     }
-
   };
 
-  const onRemoveFromCard = (id) => {
+  const onRemoveFromCard = (id: string | number) => {
     try {
       axios.delete(`${productsURL}/cart/${id}`);
       setCartItems(prev => prev.filter(item => Number(item.id) !== Number(id)));
@@ -78,7 +106,7 @@ function App() {
     }
   }
 
-  const handleFavoritesList = async (obj) => {
+  const handleFavoritesList = async (obj: IAddItem) => {
     try {
       if (favoritesList.find(favObj => Number(favObj.id) === Number(obj.id))) {
         axios.delete(`${productsURL}/favorites/${obj.id}`);
@@ -94,7 +122,7 @@ function App() {
     }
   }
 
-  const onChangeSearchInput = (e) => {
+  const onChangeSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
   }
 
@@ -102,33 +130,35 @@ function App() {
     setSearchValue('');
   }
 
-  const isItemAdded = (id) => {
+  const isItemAdded = (id: string | number) => {
     return cartItems.some(obj => Number(obj.parentId) === Number(id))
   }
 
+  const sampleAppContext: IGlobalContent = {
+    cartItems, favoritesList, products, isItemAdded, handleFavoritesList, setCartOpened, setCartItems, productsURL, onAddToCart
+  };
+
   return (
-    <AppContext.Provider value={{ cartItems, favoritesList, products, isItemAdded, handleFavoritesList, setCartOpened, setCartItems, productsURL, onAddToCart }}>
+    <AppContext.Provider value={sampleAppContext}>
       <div className="wrapper clear">
         <Cart
-          cartItems={cartItems}
           onCloseCart={() => setCartOpened(false)}
           onRemoveFromCard={onRemoveFromCard}
-          opened={cartOpened} />
+          opened={cartOpened}
+        />
         <Header onClickCart={() => setCartOpened(true)} />
         <Routes>
-          <Route exact path={process.env.PUBLIC_URL + '/'} element={<Home
+          <Route path={process.env.PUBLIC_URL + '/'} element={<Home
             products={products}
             searchValue={searchValue}
-            setSearchValue={setSearchValue}
             onChangeSearchInput={onChangeSearchInput}
             handleFavoritesList={handleFavoritesList}
             onAddToCart={onAddToCart}
             clearSearchValue={clearSearchValue}
-            cartItems={cartItems}
             isLoading={isLoading}
           />} />
-          <Route exact path={process.env.PUBLIC_URL + '/favorites'} element={<Favorites />} />
-          <Route exact path={process.env.PUBLIC_URL + '/orders'} element={<Orders />} />
+          <Route path={process.env.PUBLIC_URL + '/favorites'} element={<Favorites />} />
+          <Route path={process.env.PUBLIC_URL + '/orders'} element={<Orders />} />
         </Routes>
       </div>
     </AppContext.Provider>

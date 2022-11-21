@@ -2,7 +2,11 @@ import React from 'react';
 
 import css from '../Carousel.module.scss'
 
-const CarouselItem = ({ children }) => {
+interface ICarouselItemProps {
+    children: React.ReactNode;
+}
+
+const CarouselItem: React.FC<ICarouselItemProps> = ({ children }) => {
     return (
         <div className={css.carousel}>
             <div className={css.carouselItem}>

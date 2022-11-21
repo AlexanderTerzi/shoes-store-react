@@ -1,5 +1,7 @@
 import React from 'react';
-import { AppContext } from '../App';
+
+import { AppContext, IAddItem } from '../App';
+
 import Card from '../components/Card/Card';
 import Info from '../components/Info';
 
@@ -16,7 +18,7 @@ const Favorites = () => {
 
                 <div className="d-flex flex-wrap justify-around">
                     {favoritesList != 0
-                        ? favoritesList.map(item => (
+                        ? favoritesList.map((item: IAddItem) => (
                             <Card
                                 id={item.id}
                                 image={item.image}
@@ -24,7 +26,8 @@ const Favorites = () => {
                                 price={item.price}
                                 key={item.id}
                                 favorited={true}
-                                onFavoriteClick={handleFavoritesList} />
+                                onFavoriteClick={handleFavoritesList}
+                                onPlusClick={undefined} />
                         ))
                         : <Info
                             title={"Закладок нет :("}
